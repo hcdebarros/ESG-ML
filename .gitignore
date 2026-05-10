@@ -1,0 +1,37 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+.venv/
+env/
+ENV/
+.ipynb_checkpoints/
+
+# MLflow
+mlruns/
+mlartifacts/
+
+# Modelos serializados
+models/*.joblib
+models/*.pkl
+
+# Dados sensiveis (nunca subir dados originais com PII)
+data/raw/*.xlsx
+data/raw/*.csv
+!data/raw/.gitkeep
+
+# Sistema
+.DS_Store
+Thumbs.db
+*.log
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# Streamlit
+.streamlit/secrets.toml

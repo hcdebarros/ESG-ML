@@ -1,0 +1,62 @@
+# Orquestra: pipeline (treino) + MLflow UI + Streamlit dashboard.
+#
+# Uso:
+#   docker compose up --build
+#
+# Acesso:
+#   - Streamlit:  http://localhost:8501
+#   - MLflow UI:  http://localhost:5000
+#
+# Estrategia: APENAS o servico `pipeline` constroi a imagem
+# `esg-fornecedores:latest`. Os servicos `mlflow` e `dashboard` reutilizam
+# a imagem ja construida, evitando builds paralelos que consomem memoria.
+
+services:
+  pipeline:
+    build:
+      context: .
+    image: esg-fornecedores:latest
+    container_name: esg-pipeline
+    command: bash -lc "python -m src.preprocess && python -m src.synthesize && python -m src.train"
+    volumes:
+      # data/raw montado RO: o XLSX original nao entra na imagem (PII), mas o
+      # container le do host. Veja .dockerignore para a politica.
+      - ./data/raw:/app/data/raw:ro
+      # Codigo montado do host -> mudancas em src/app/notebooks nao exigem rebuild
+      - ./src:/app/src
+      - ./app:/app/app
+      - ./notebooks:/app/notebooks
+      - ./mlruns:/app/mlruns
+      - ./models:/app/models
+      - ./reports:/app/reports
+      - ./data/processed:/app/data/processed
+
+  mlflow:
+    image: esg-fornecedores:latest
+    container_name: esg-mlflow
+    command: bash -lc "mlflow ui --backend-store-uri /app/mlruns --host 0.0.0.0 --port 5000"
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./mlruns:/app/mlruns
+    depends_on:
+      pipeline:
+        condition: service_completed_successfully
+
+  dashboard:
+    image: esg-fornecedores:latest
+    container_name: esg-dashboard
+    command: bash -lc "streamlit run app/dashboard.py --server.address=0.0.0.0 --server.port=8501"
+    ports:
+      - "8501:8501"
+    volumes:
+      # Codigo montado do host -> ajustes no dashboard refletem com restart
+      - ./src:/app/src
+      - ./app:/app/app
+      - ./mlruns:/app/mlruns
+      - ./models:/app/models
+      - ./reports:/app/reports
+      - ./data/processed:/app/data/processed
+    depends_on:
+      pipeline:
+        condition: service_completed_successfully

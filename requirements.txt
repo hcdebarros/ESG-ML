@@ -1,0 +1,31 @@
+# Core
+pandas==2.2.2
+numpy==1.26.4
+scikit-learn==1.4.2
+scipy==1.13.0
+
+# IO
+openpyxl==3.1.2
+
+# Sintese
+sdv==1.13.1
+
+# MLOps
+mlflow==2.13.2
+
+# Visualizacao
+matplotlib==3.8.4
+seaborn==0.13.2
+plotly==5.22.0
+
+# Dashboard
+streamlit==1.35.0
+
+# Utilidades
+joblib==1.4.2
+pyyaml==6.0.1
+
+# Notebook (apenas para uso LOCAL - removido do build do container
+# para reduzir consumo de memoria).
+# Se quiser executar o notebook dentro do container:
+#     pip install jupyter ipykernel

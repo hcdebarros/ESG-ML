@@ -1,0 +1,15 @@
+.git
+.gitignore
+.venv
+venv
+__pycache__
+*.pyc
+.ipynb_checkpoints
+.vscode
+.idea
+data/raw/*
+notebooks/.ipynb_checkpoints
+mlruns/.trash
+README.md
+*.md
+reports

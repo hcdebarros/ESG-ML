@@ -1,0 +1,25 @@
+{
+  "model_name": "decision_tree",
+  "feature_columns": [
+    "porte",
+    "faturamento",
+    "sancao_admin",
+    "tem_certificacoes",
+    "treina_sustentabilidade",
+    "gestao_agua",
+    "eficiencia_energetica",
+    "gestao_residuos",
+    "pegada_carbono",
+    "auditoria_gee",
+    "voluntariado",
+    "saude_mental",
+    "clausulas_contratos",
+    "treina_compradores",
+    "diversidade_fornecedores"
+  ],
+  "classes": [
+    "Alta",
+    "Baixa",
+    "Media"
+  ]
+}
