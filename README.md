@@ -8,10 +8,11 @@
 
 | Nome | GitHub |
 |------|--------|
-| Helder Barros | @___ |
-| _(membro 2)_  | @___ |
-| _(membro 3)_  | @___ |
-| _(membro 4)_  | @___ |
+| Helder Barros | @hcdebarros |
+| Felipe Salustiano  | @___ |
+| José Kevin  | @___ |
+| Lucas Mendes  | @___ |
+| Lucas Gomes  | @___ |
 
 > Substituir os placeholders pelos nomes e usuarios reais do GitHub antes da entrega.
 
